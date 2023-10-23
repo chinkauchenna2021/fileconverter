@@ -1,13 +1,19 @@
 import React from 'react'
 import DroppedSingleFile from './droppedSingleFile';
 import * as SC from '../droppedFileNotNull/styles';
+import { useDropFile } from '../../../../../stores/useDropFile';
+import SelectFileNotNull from './shared/selectFileNotNull';
 
 type Props = {}
 
-function DroppedFileNotNull({}: Props) {
+function  DroppedFileNotNull({}: Props) {
+  const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
+
   return (
-    <SC.SingleFileContainer className='flex flex-col justify-center items-center w-full min-h-fit  shadow  shadow-card'>
-       <DroppedSingleFile />
+    <SC.SingleFileContainer  className=" bg-transparent ">
+        <DroppedSingleFile />
+        <SelectFileNotNull />
+        
     </SC.SingleFileContainer>
   )
 }

@@ -17,8 +17,6 @@ function Customezone({}: Props) {
   const updateDroppedFile = useDropFile(
     (state: any) => state?.updateDroppedFile
   );
-  console.log("dropped file");
-  console.log(droppedFiles, updateDroppedFile);
 
   useEffect(() => {
     let dragArea = window.document.querySelector(".dragarea");
@@ -74,7 +72,9 @@ function Customezone({}: Props) {
 
             :
       // file not empty section 
+      <>
             <DroppedFileNotNull />
+      </>
 
         }
 

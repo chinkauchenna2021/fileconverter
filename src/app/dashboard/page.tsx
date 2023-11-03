@@ -13,7 +13,7 @@ function index() {
 
   return (
     <div className='max-w-5xl m-auto flex  justify-center flex-col h-screen space-y-3'>
-     <div className='w-full text-center '> <div className='text-7xl font-extrabold flex w-5/6 mx-auto  justify-center items-center min-h-[120px] mb-8 '>File Conversion place center </div></div>
+     <div className='w-full text-center '> <div className='text-7xl font-semibold flex w-5/6 mx-auto  justify-center items-center min-h-[120px] mb-8 '>File Conversion place center </div></div>
     {/* <Dropzones /> */}
     <Customezone />
     </div>

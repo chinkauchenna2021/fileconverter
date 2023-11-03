@@ -51,7 +51,7 @@ function SelectFileNotNull({}: Props) {
               convert
             </div>
             <div className="w-fit h-fit flex px-2 ">
-              <FiArrowRight size={25} className="text-slate-300" />
+              <FiArrowRight size={25} className="text-slate-300 " />
             </div>
           </div>
         </div>

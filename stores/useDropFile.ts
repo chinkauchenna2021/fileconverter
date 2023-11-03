@@ -1,12 +1,7 @@
 import { AnyComponent } from "styled-components/dist/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface IStateContent {
-  file: File;
-  fileConversionFormat: string;
-  fileType: string;
-}
+import  {IStateContent} from '../types/fileTypes'
 
 interface State {
   droppedFiles: IStateContent[];

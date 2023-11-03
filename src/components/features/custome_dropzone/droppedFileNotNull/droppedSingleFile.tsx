@@ -7,23 +7,26 @@ import { getFileSize } from "@/hooks/getFileSize";
 import { FiX, FiArrowRight } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import RowTabDisplay from "./shared/rowTabDisplay";
+import { IStateContent } from "../../../../../types/fileTypes";
 
 type Props = {};
 
 function DroppedSingleFile({}: Props) {
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
   // const {filetype , fileformat} = getFileType(file.type);
+
+  console.log(droppedFiles);
   return (
     <div className="bg-transparent mb-3">
-      {droppedFiles?.map((files: File, index: number) => {
-        console.log(files);
-        switch (getFileType(files.type).filetype.toLowerCase()) {
+      {droppedFiles?.map((files:IStateContent, index: number) => {
+  
+        switch (getFileType(files?.file?.type).filetype.toLowerCase()) {
           case "image":
-            return <RowTabDisplay image="image" files={files} index={index} />
+            return <RowTabDisplay key={index} image="image" files={files.file} index={index} />
             break;
 
           case "video":
-            return <div className="">
+            return <div className="" >
                {/* video components */}
                </div>;
         }

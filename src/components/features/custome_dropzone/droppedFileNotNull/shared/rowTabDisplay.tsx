@@ -10,9 +10,10 @@ type Props = {
   index: number;
   files: File;
   image: string;
+  onchange:(item:string)=>void
 };
 
-function RowTabDisplay({ index, files }: Props) {
+function RowTabDisplay({ index, files , onchange }: Props) {
   return (
     <div
       key={index}
@@ -33,7 +34,7 @@ function RowTabDisplay({ index, files }: Props) {
         <div className="w-fit flex justify-center items-center">
           <div className="w-fit h-fit text-sm text-slate-400 mx-2">to:</div>
           <div className="w-fit h-fit">
-            <SelectFileConversion />
+            <SelectFileConversion onchange={(item:string)=>onchange(item)} />
           </div>
         </div>
       </div>

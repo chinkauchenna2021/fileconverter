@@ -2,7 +2,11 @@ import React, { useState, useReducer, useCallback } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { fetchSelectedFiletype } from "@/hooks/fetchSelectedFiletype";
 
-interface ISelectButton {}
+interface ISelectButton {
+onchange:(item:string)=>void
+
+
+}
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -30,7 +34,7 @@ type ISelectType = {
 
 interface IFormat {}
 
-function SelectFileConversion({}: ISelectButton) {
+function SelectFileConversion({onchange}: ISelectButton) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string>("image");
   const [selectedInput, setSelectedInput] = useState<string>("...");
@@ -73,6 +77,7 @@ function SelectFileConversion({}: ISelectButton) {
 
   const selectedFormat = (item: string, index: number) => {
     setSelectedInput(item);
+    onchange(item)
   };
 
   let returndata = fetchSelectedFiletype(value, fileSelcetionTypes);

@@ -5,5 +5,7 @@ export type IStateContent =  {
     file: File;
     fileConversionFormat: string;
     fileType: string;
+     fileIndex:number , 
+     isUploaded:boolean
   }
   

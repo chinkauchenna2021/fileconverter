@@ -15,7 +15,7 @@ interface IProps {};
 function Customezone({}: IProps) {
   const [showDropZone, setShowDropZone] = useState<boolean>(false);
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
-  
+
   const updateDroppedFile = useDropFile(
     (state: any) => state?.updateDroppedFile
   );
@@ -57,7 +57,7 @@ function Customezone({}: IProps) {
   //  fileType: string;
    
    files.forEach((item , index)=>{
-     let fileUploadData = {file:item , fileConversionFormat: "" , fileType:""};
+     let fileUploadData = {file:item , fileConversionFormat: "" , fileType:"" , fileIndex:index , isUploaded:false};
      filesUploadCollection.push(fileUploadData);
      
   })

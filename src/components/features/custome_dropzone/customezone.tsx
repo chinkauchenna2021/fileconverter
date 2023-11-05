@@ -55,6 +55,7 @@ function Customezone({}: IProps) {
   //  file: File;
   //  fileConversionFormat: string;
   //  fileType: string;
+  
    
    files.forEach((item , index)=>{
      let fileUploadData = {file:item , fileConversionFormat: "" , fileType:"" , fileIndex:index , isUploaded:false};

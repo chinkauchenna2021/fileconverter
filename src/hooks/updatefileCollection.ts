@@ -10,7 +10,7 @@ interface fileUpdate{
 
 export const updatefile = (fileConversionFormat:string , fileupdateType:string,  fileupdateIndex:number,  fileuploadCollection:IStateContent[]):IStateContent[] =>{
     let uploadValue =  fileuploadCollection.map((item , index)=>{
-        if(item.fileIndex == fileupdateIndex){
+        if(index == fileupdateIndex){
             return {...item , fileConversionFormat , fileupdateType}
         }
 

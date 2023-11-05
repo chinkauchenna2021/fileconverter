@@ -6,7 +6,7 @@ import  {IStateContent} from '../types/fileTypes'
 interface State {
   droppedFiles: IStateContent[];
   updateDroppedFile: (file: any[]) => void;
-  deleteFile:(fileId:number)=>void
+  deleteFile:(fileId:number)=>void;
 }
 
 
@@ -20,7 +20,10 @@ export const useDropFile = create<State>((set , get) => ({
   deleteFile:(fileId:number)=>{
       let data = get().droppedFiles.filter(()=>{});
   },
-  fileTypeToConvert: (FileType: string) => {},
+  fileTypeToConvert: (fileFormatChanged:IStateContent[]) => {
+
+    set(()=>({droppedFiles: fileFormatChanged}))
+  },
 }));
 
 // interface State {

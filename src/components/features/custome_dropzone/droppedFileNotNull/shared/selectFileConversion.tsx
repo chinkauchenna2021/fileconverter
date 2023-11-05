@@ -3,9 +3,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { fetchSelectedFiletype } from "@/hooks/fetchSelectedFiletype";
 
 interface ISelectButton {
-onchange:(item:string)=>void
-
-
+  onchange: (item: string) => void;
 }
 import { Button } from "@/components/ui/button";
 import {
@@ -34,7 +32,7 @@ type ISelectType = {
 
 interface IFormat {}
 
-function SelectFileConversion({onchange}: ISelectButton) {
+function SelectFileConversion({ onchange }: ISelectButton) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string>("image");
   const [selectedInput, setSelectedInput] = useState<string>("...");
@@ -77,11 +75,11 @@ function SelectFileConversion({onchange}: ISelectButton) {
 
   const selectedFormat = (item: string, index: number) => {
     setSelectedInput(item);
-    onchange(item)
+    onchange(item);
   };
 
   let returndata = fetchSelectedFiletype(value, fileSelcetionTypes);
-  console.log(returndata);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

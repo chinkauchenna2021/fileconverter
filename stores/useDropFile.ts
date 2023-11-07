@@ -7,6 +7,8 @@ interface State {
   droppedFiles: IStateContent[];
   updateDroppedFile: (file: any[]) => void;
   deleteFile:(fileId:number)=>void;
+  fileSendToServer:(fileUpload:IStateContent[])=>void
+  
 }
 
 
@@ -18,25 +20,17 @@ export const useDropFile = create<State>((set , get) => ({
     }));
   },
   deleteFile:(fileId:number)=>{
-      let data = get().droppedFiles.filter(()=>{});
-  },
+      let data = get().droppedFiles.filter((droppedfile, index)=>droppedfile.fileIndex !== fileId);
+     set((state)=>({droppedFiles:[...data]}))
+    },
   fileTypeToConvert: (fileFormatChanged:IStateContent[]) => {
 
     set(()=>({droppedFiles: fileFormatChanged}))
   },
+ 
+  fileSendToServer:async (fileUpload:IStateContent[])=>{
+
+  } 
+
 }));
 
-// interface State {
-//     droppedFiles:FileList[]
-//     updateDroppedFile:(file:any[])=>void
-// }
-
-// export const useDropFile = create<State>((set)=>({
-//        droppedFiles:[],
-//        updateDroppedFile:(file:any[])=>{
-//          set((state: any) => ({ droppedFiles: Array.from(new Set([...state.droppedFiles, ...file]))}))
-//     },
-//     fileTypeToConvert:(FileType:string)=>{
-
-//     }
-// }));

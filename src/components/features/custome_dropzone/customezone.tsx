@@ -49,13 +49,7 @@ function Customezone({}: IProps) {
     ev.preventDefault();
     ev.stopPropagation();
    let files = getDroppedFile(ev);
-   console.log("dragged files")
-   console.log(files)
    let filesUploadCollection:IStateContent[] = [];
-  //  file: File;
-  //  fileConversionFormat: string;
-  //  fileType: string;
-  
    
    files.forEach((item , index)=>{
      let fileUploadData = {file:item , fileConversionFormat: "" , fileType:"" , fileIndex:index , isUploaded:false};

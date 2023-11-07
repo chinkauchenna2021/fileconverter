@@ -24,7 +24,6 @@ function DroppedSingleFile({}: Props) {
     changeDataIndex: number
   ) => {
     let updatedCollection = updatefile(item,filetype,changeDataIndex,droppedFiles);
-   console.log(updatedCollection)
     fileTypeToConvert(updatedCollection);
   };
 

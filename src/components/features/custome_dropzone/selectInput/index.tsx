@@ -2,8 +2,15 @@ import React from 'react'
 import * as SC from '@/components/features/custome_dropzone/selectInput/style'
 import { FiFolderPlus } from "react-icons/fi";
 import { FaDropbox , FaGoogleDrive } from "react-icons/fa";
+// import DropboxChooser from 'react-dropbox-chooser'
 // FaDropbox
 type Props = {}
+
+
+
+// dropbox custom input
+
+
 
 function SelectInput({}: Props) {
   return (
@@ -12,7 +19,16 @@ function SelectInput({}: Props) {
                   <div className='w-3/6 h-full flex justify-center items-center text-white font-medium capitalize text-xl'>choose file</div>
                   <div className='w-3/6 flex justify-evenly h-5/6 px-2 gap-1'>
                   <div className='w-full  h-[100%] justify-center flex items-center'><FiFolderPlus size={26}  className="text-white" /></div>
-                  <div className='w-full  h-[100%]  justify-center flex items-center hover:bg-[rgba(0,0,0,0.05)]'><FaDropbox size={26}  className="text-white" /></div>
+                  <div className='w-full  h-[100%]  justify-center flex items-center hover:bg-[rgba(0,0,0,0.05)]'>
+                  {/* <DropboxChooser 
+                      appKey={process.env.DROPBOX}
+                      success={(files:File) => onSuccess(files)}
+                      cancel={() =>onCancel()}
+                      multiselect={true}
+                      extensions={['.mp4']} >
+                      <div className="dropbox-button">Click me!</div>        
+                  </DropboxChooser> */}
+                    <FaDropbox size={26}  className="text-white" /></div>
                   <div  className='w-full h-[100%] justify-center flex items-center'><FaGoogleDrive size={26}  className="text-white" /></div>
                   </div>
 

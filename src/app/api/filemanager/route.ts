@@ -26,5 +26,5 @@ export async function POST(request: NextRequest) {
   const filedata = Buffer.from(bytes);
 
   const convertURL = await ffmpegClient(file,filedata ,fileConvertionextension ,fileconversionURLType);
- return  NextResponse.json({success:true , mssage:"open file to check for your image"});
+ return  NextResponse.json({success:true , mssage:"open file to check for your image" , response:convertURL});
 }

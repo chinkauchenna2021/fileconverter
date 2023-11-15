@@ -6,11 +6,10 @@ import  {IStateContent} from '../types/fileTypes'
 interface State {
   droppedFiles: IStateContent[];
   updateDroppedFile: (file: any[]) => void;
-  deleteFile:(fileId:number)=>void;
+  deleteFile:(fileId:IStateContent)=>void;
   fileSendToServer:(fileUpload:IStateContent[])=>void
   
 }
-
 
 export const useDropFile = create<State>((set , get) => ({
   droppedFiles: [],
@@ -19,9 +18,9 @@ export const useDropFile = create<State>((set , get) => ({
       droppedFiles: Array.from(new Set([...state.droppedFiles, ...file])),
     }));
   },
-  deleteFile:(fileId:number)=>{
-      let data = get().droppedFiles.filter((droppedfile, index)=>droppedfile.fileIndex !== fileId);
-     set((state)=>({droppedFiles:[...data]}))
+  deleteFile:(singlefiles:IStateContent)=>{
+      let data = get().droppedFiles.filter((droppedfile)=>droppedfile.fileIndex !== singlefiles.fileIndex);
+     set(()=>({droppedFiles:[...data]}))
     },
   fileTypeToConvert: (fileFormatChanged:IStateContent[]) => {
 

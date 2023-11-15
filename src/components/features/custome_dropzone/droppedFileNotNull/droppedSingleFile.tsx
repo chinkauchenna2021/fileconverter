@@ -14,6 +14,10 @@ type Props = {};
 
 function DroppedSingleFile({}: Props) {
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
+  const deleteFile = useDropFile((state: any) => state?.deleteFile);
+  
+
+
   const fileTypeToConvert = useDropFile(
     (state: any) => state?.fileTypeToConvert
   );
@@ -27,8 +31,14 @@ function DroppedSingleFile({}: Props) {
     fileTypeToConvert(updatedCollection);
   };
 
+const closeSingleTab = (file:IStateContent)=>{
+  deleteFile(file);
+}
 
-  console.log(droppedFiles);
+
+
+
+  // console.log(droppedFiles);
 
   return (
     <div className="bg-transparent mb-3">
@@ -42,6 +52,7 @@ function DroppedSingleFile({}: Props) {
                 files={files.file}
                 index={index}
                 onchange={(item: string) => changeFormat(item, "image", index)}
+                onclick={() => closeSingleTab(files)}
               />
             );
             break;

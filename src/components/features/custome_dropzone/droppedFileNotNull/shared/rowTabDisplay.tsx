@@ -10,10 +10,11 @@ type Props = {
   index: number;
   files: File;
   image: string;
-  onchange:(item:string)=>void
+  onchange:(item:string)=>void;
+  onclick:()=>void
 };
 
-function RowTabDisplay({ index, files , onchange }: Props) {
+function RowTabDisplay({ index, files , onchange , onclick }: Props) {
   return (
     <div
       key={index}
@@ -48,7 +49,7 @@ function RowTabDisplay({ index, files , onchange }: Props) {
           </div>
         </div>
 
-        <div className="w-full h-full justify-end flex items-center">
+        <div  onClick={()=>onclick()}  className="w-full h-full justify-end flex items-center">
           <div className="w-fit h-fit rounded-sm cursor-pointer p-1 hover:border hover:border-slate-500 mx-2">
             <FiX className="text-slate-400 hover:text-slate-500 " size={30} />
           </div>

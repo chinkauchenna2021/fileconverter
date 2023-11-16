@@ -31,8 +31,9 @@ function DroppedSingleFile({}: Props) {
     fileTypeToConvert(updatedCollection);
   };
 
-const closeSingleTab = (file:IStateContent)=>{
-  deleteFile(file);
+const closeSingleTab = ( index:number)=>{
+  // console.log(file , index)
+  deleteFile(index);
 }
 
 
@@ -52,7 +53,7 @@ const closeSingleTab = (file:IStateContent)=>{
                 files={files.file}
                 index={index}
                 onchange={(item: string) => changeFormat(item, "image", index)}
-                onclick={() => closeSingleTab(files)}
+                onclick={() => closeSingleTab(index)}
               />
             );
             break;

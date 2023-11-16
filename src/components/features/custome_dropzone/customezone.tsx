@@ -20,19 +20,24 @@ function Customezone({}: IProps) {
     (state: any) => state?.updateDroppedFile
   );
   
-    let dragArea = window.document.querySelector(".dragarea");
-    let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
-    mainDash?.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setShowDropZone(true);
-    });
+
+useEffect(()=>{
+
+  let dragArea = window.document.querySelector(".dragarea");
+  let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
+  mainDash?.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(true);
+  });
   
-    mainDash?.addEventListener("dragleave", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setShowDropZone(false);
-    });
+  mainDash?.addEventListener("dragleave", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(false);
+  });
+
+},[showDropZone , setShowDropZone])  
 
 
 

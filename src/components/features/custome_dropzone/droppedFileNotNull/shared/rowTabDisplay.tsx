@@ -11,10 +11,11 @@ type Props = {
   files: File;
   image: string;
   onchange:(item:string)=>void;
-  onclick:()=>void
+  onclick:()=>void;
+
 };
 
-function RowTabDisplay({ index, files , onchange , onclick }: Props) {
+function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
   return (
     <div
       key={index}

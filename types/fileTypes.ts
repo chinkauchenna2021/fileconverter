@@ -2,10 +2,11 @@
 export type IFiles = File | null
 
 export type IStateContent =  {
-    file: File;
+    file:File;
     fileConversionFormat: string;
+    originalExt:string;
     fileType: string;
-     fileIndex:number , 
+     fileIndex:number; 
      isUploaded:boolean
   }
   

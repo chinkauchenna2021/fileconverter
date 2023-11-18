@@ -9,6 +9,7 @@ import { useDropFile } from "../../../../stores/useDropFile";
 import { getDroppedFile } from "@/hooks/getDroppedFiles";
 import DroppedFileNotNull from "./droppedFileNotNull";
 import  {IStateContent} from '../../../../types/fileTypes'
+import { getExtension } from "@/hooks/getFileExt";
 
 interface IProps {};
 
@@ -57,8 +58,11 @@ useEffect(()=>{
    let filesUploadCollection:IStateContent[] = [];
    
    files.forEach((item , index)=>{
-     let fileUploadData = {file:item , fileConversionFormat: "" , fileType:"" , fileIndex:index , isUploaded:false};
+     let ext = getExtension(item.name);
+    //  console.log(ext , item.name)
+     let fileUploadData = {file:item , fileConversionFormat: "" , originalExt:ext , fileType:"" , fileIndex:index , isUploaded:false};
      filesUploadCollection.push(fileUploadData);
+
      
   })
   if(filesUploadCollection.length !== 0 ){
@@ -72,6 +76,9 @@ useEffect(()=>{
     e.stopPropagation();
     setShowDropZone(true);
   };
+
+
+  console.log(droppedFiles)
 
   return (
     <div className=" px-8 w-full h-fit">

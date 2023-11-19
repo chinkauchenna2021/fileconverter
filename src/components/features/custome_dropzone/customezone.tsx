@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useLayoutEffect } from "react";
 import * as SC from "./styles";
-import { FileDrop } from "react-file-drop";
 import SelectInput from "./selectInput";
 import Coverzone from "./coverZone";
 import { useDropFile } from "../../../../stores/useDropFile";
@@ -20,6 +19,9 @@ function Customezone({}: IProps) {
     (state: any) => state?.updateDroppedFile
   );
   
+
+  useEffect(()=>{
+  
     let dragArea = window.document.querySelector(".dragarea");
     let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
     mainDash?.addEventListener("dragover", (e) => {
@@ -33,6 +35,10 @@ function Customezone({}: IProps) {
       e.stopPropagation();
       setShowDropZone(false);
     });
+  
+  },[showDropZone , setShowDropZone])
+
+
 
 
 
@@ -71,16 +77,19 @@ function Customezone({}: IProps) {
   return (
     <div className=" px-8 w-full h-fit">
       {droppedFiles.length == 0 ? (
-        <div className="dragarea">
+      <>
             <Coverzone
             onDrop={(e) => dropFiledata(e)}
             onDragover={(e) => dragoverCoverZone(e)}
             isDropped={showDropZone}
           />
+        <div className="dragarea" >
         <SC.DropZoneContainer className="w-full h-100  m-auto flex justify-center items-center">
           <SelectInput />
         </SC.DropZoneContainer>
         </div>
+        </>
+
       ) : (
         // file not empty section
         <div className="dragarea">

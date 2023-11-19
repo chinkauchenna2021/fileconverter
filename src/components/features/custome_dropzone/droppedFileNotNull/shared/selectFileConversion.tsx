@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useCallback } from "react";
+import React, { useState, useReducer, useCallback, useMemo } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { fetchSelectedFiletype } from "@/hooks/fetchSelectedFiletype";
 
@@ -36,6 +36,8 @@ function SelectFileConversion({ onchange }: ISelectButton) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string>("image");
   const [selectedInput, setSelectedInput] = useState<string>("...");
+ 
+  
 
   const fileSelcetionTypes: ISelectType = {
     image: [
@@ -69,6 +71,9 @@ function SelectFileConversion({ onchange }: ISelectButton) {
     },
   ];
 
+
+ 
+
   const selectFileType = (selectedType: string) => {
     setValue(selectedType.toLowerCase());
   };
@@ -76,9 +81,13 @@ function SelectFileConversion({ onchange }: ISelectButton) {
   const selectedFormat = (item: string, index: number) => {
     setSelectedInput(item);
     onchange(item);
+  
+  
   };
 
   let returndata = fetchSelectedFiletype(value, fileSelcetionTypes);
+ 
+
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -97,14 +106,14 @@ function SelectFileConversion({ onchange }: ISelectButton) {
         <Command>
           <CommandInput placeholder="Search framework..." />
           <CommandEmpty>No Filetype Found.</CommandEmpty>
-          <div className="h-fit grid grid-cols-3 border-r">
-            <div className="col-span-1 flex-col flex justify-center items-center">
+          <div className="h-fit grid gap-3 grid-cols-3 border-r py-2">
+            <div className="col-span-1 flex-col flex gap-1 justify-center items-center">
               {conversionType.map((type, index) => (
                 <div
                   onClick={() => selectFileType(type.value)}
                   key={index}
                   className={cn(
-                    "w-full py-4 text-sm text-center hover:bg-slate-300"
+                    `w-full py-4 cursor-pointer text-sm text-center  hover:text-white hover:bg-blue-700 ${value.toLowerCase() === type.value.toLowerCase() ? "bg-blue-700 text-white" : "bg-slate-200"}`
                   )}
                 >
                   {type.value}
@@ -112,7 +121,7 @@ function SelectFileConversion({ onchange }: ISelectButton) {
               ))}
             </div>
             <div className="col-span-2">
-              <div className="flex flex-wrap scrollbararea">
+              <div className="flex flex-wrap gap-2 scrollbararea">
                 {fetchSelectedFiletype(value, fileSelcetionTypes)?.map(
                   (item, index) => {
                     return (
@@ -120,7 +129,7 @@ function SelectFileConversion({ onchange }: ISelectButton) {
                         onClick={() => selectedFormat(item, index)}
                         key={index}
                         className={cn(
-                          "w-fit px-3 py-2 rounded-sm flex justify-center items-center h-fit bg-slate-50 text-sm hover:bg-slate-400 hover:text-white "
+                          `w-fit px-3 py-2 cursor-pointer rounded-[0.1rem] flex justify-center items-center h-fit  hover:bg-blue-700 text-xs hover:text-white ${selectedInput === item ? "bg-blue-700 text-white" : "bg-slate-200 "}`
                         )}
                       >
                         {item.toUpperCase()}

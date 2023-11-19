@@ -15,28 +15,29 @@ type Props = {};
 function DroppedSingleFile({}: Props) {
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
   const deleteFile = useDropFile((state: any) => state?.deleteFile);
-  
-
 
   const fileTypeToConvert = useDropFile(
     (state: any) => state?.fileTypeToConvert
   );
-  
+
   const changeFormat = (
     item: string,
     filetype: string,
     changeDataIndex: number
   ) => {
-    let updatedCollection = updatefile(item,filetype,changeDataIndex,droppedFiles);
+    let updatedCollection = updatefile(
+      item,
+      filetype,
+      changeDataIndex,
+      droppedFiles
+    );
     fileTypeToConvert(updatedCollection);
   };
 
-const closeSingleTab = (file:IStateContent)=>{
-  deleteFile(file);
-}
-
-
-
+  const closeSingleTab = (index: number) => {
+    // console.log(file , index)
+    deleteFile(index);
+  };
 
   // console.log(droppedFiles);
 
@@ -52,7 +53,7 @@ const closeSingleTab = (file:IStateContent)=>{
                 files={files.file}
                 index={index}
                 onchange={(item: string) => changeFormat(item, "image", index)}
-                onclick={() => closeSingleTab(files)}
+                onclick={() => closeSingleTab(index)}
               />
             );
             break;

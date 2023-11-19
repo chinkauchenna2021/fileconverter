@@ -9,9 +9,20 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import { useDropFile } from "../../../../../../stores/useDropFile";
+
 type Props = {};
 
 function SelectFileNotNull({}: Props) {
+  const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
+  const droppedFileConverted = useDropFile(
+    (state: any) => state?.fileSendToServer
+  );
+
+  const onconvert = async () => {
+    droppedFileConverted(droppedFiles);
+  };
+
   return (
     <SC.SharedFileSelector className="border-none overflow-hidden w-full h-20 border border-slate-800 grid grid-cols-5 flex-row justify-between items-center">
       <div className="col-span-3"></div>
@@ -46,7 +57,10 @@ function SelectFileNotNull({}: Props) {
           </Tooltip>
         </TooltipProvider>
         <div className="h-full w-full col-span-3 bg-red-600 cursor-pointer">
-          <div className="justify-between px-1 items-center w-full h-20 bg-[#fd2929] z-10 flex border-red-500 ">
+          <div
+            onClick={() => onconvert()}
+            className="justify-between px-1 items-center w-full h-20 bg-[#fd2929] z-10 flex border-red-500 "
+          >
             <div className="w-fit h-fit text-md cursor-pointer capitalize font-semibold text-white px-2 ">
               convert
             </div>

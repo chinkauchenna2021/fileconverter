@@ -8,6 +8,7 @@ import { useDropFile } from "../../../../stores/useDropFile";
 import { getDroppedFile } from "@/hooks/getDroppedFiles";
 import DroppedFileNotNull from "./droppedFileNotNull";
 import  {IStateContent} from '../../../../types/fileTypes'
+import { getExtension } from "@/hooks/getFileExt";
 
 interface IProps {};
 
@@ -20,25 +21,23 @@ function Customezone({}: IProps) {
   );
   
 
-  useEffect(()=>{
-  
-    let dragArea = window.document.querySelector(".dragarea");
-    let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
-    mainDash?.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setShowDropZone(true);
-    });
-  
-    mainDash?.addEventListener("dragleave", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setShowDropZone(false);
-    });
-  
-  },[showDropZone , setShowDropZone])
+useEffect(()=>{
 
+  let dragArea = window.document.querySelector(".dragarea");
+  let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
+  mainDash?.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(true);
+  });
+  
+  mainDash?.addEventListener("dragleave", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(false);
+  });
 
+},[showDropZone , setShowDropZone])  
 
 
 
@@ -58,8 +57,11 @@ function Customezone({}: IProps) {
    let filesUploadCollection:IStateContent[] = [];
    
    files.forEach((item , index)=>{
-     let fileUploadData = {file:item , fileConversionFormat: "" , fileType:"" , fileIndex:index , isUploaded:false};
+     let ext = getExtension(item.name);
+    //  console.log(ext , item.name)
+     let fileUploadData = {file:item , fileConversionFormat: "" , originalExt:ext , fileType:"" , fileIndex:index , isUploaded:false};
      filesUploadCollection.push(fileUploadData);
+
      
   })
   if(filesUploadCollection.length !== 0 ){
@@ -73,6 +75,9 @@ function Customezone({}: IProps) {
     e.stopPropagation();
     setShowDropZone(true);
   };
+
+
+  console.log(droppedFiles)
 
   return (
     <div className=" px-8 w-full h-fit">

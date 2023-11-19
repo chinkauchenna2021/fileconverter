@@ -10,9 +10,10 @@ export const authOptions = {
   providers: [
     DiscordProvider({
       clientId: String(process.env.DISCORD_ID),
-      clientSecret: String(process.env.DISCORD_SECRETS),
+      clientSecret: String(process.env.DISCORD_SECRETE),
     }),
   ],
 } as AuthOptions
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
+export {handler as GET  , handler as POST};

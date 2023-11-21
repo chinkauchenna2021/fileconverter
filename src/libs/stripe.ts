@@ -1,11 +1,5 @@
-export  function createSubscription(){
+export function createSubscription() {}
 
-}
+export function getSubscription() {}
 
-export function getSubscription(){
-
-}
-
-export function getUsageRecord(){
-
-}
+export function getUsageRecord() {}

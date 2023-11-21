@@ -8,32 +8,39 @@ import Coverzone from "./coverZone";
 import { useDropFile } from "../../../../stores/useDropFile";
 import { getDroppedFile } from "@/hooks/getDroppedFiles";
 import DroppedFileNotNull from "./droppedFileNotNull";
+import  {IStateContent} from '../../../../types/fileTypes'
+import { getExtension } from "@/hooks/getFileExt";
 
-type Props = {};
+interface IProps {};
 
-function Customezone({}: Props) {
+function Customezone({}: IProps) {
   const [showDropZone, setShowDropZone] = useState<boolean>(false);
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
+
   const updateDroppedFile = useDropFile(
     (state: any) => state?.updateDroppedFile
   );
-  console.log("dropped file");
-  console.log(droppedFiles, updateDroppedFile);
+  
 
-  useEffect(() => {
-    let dragArea = window.document.querySelector(".dragarea");
-    let mainDash = dragArea?.parentElement?.parentElement;
+useEffect(()=>{
 
-    mainDash?.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      setShowDropZone(true);
-    });
+  let dragArea = window.document.querySelector(".dragarea");
+  let mainDash = dragArea?.parentElement?.parentElement?.parentElement;
+  mainDash?.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(true);
+  });
+  
+  mainDash?.addEventListener("dragleave", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowDropZone(false);
+  });
 
-    mainDash?.addEventListener("dragleave", (e) => {
-      e.preventDefault();
-      setShowDropZone(false);
-    });
-  }, [showDropZone]);
+},[showDropZone , setShowDropZone])  
+
+
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,43 +48,62 @@ function Customezone({}: Props) {
     // do something with your files...
   };
   const onTargetClick = (e: React.SyntheticEvent<HTMLDivElement, Event>) => {
-    console.log(e);
+
   };
-
-
 
   const dropFiledata = (ev: React.DragEvent<HTMLDivElement>) => {
     ev.preventDefault();
+    ev.stopPropagation();
    let files = getDroppedFile(ev);
-    updateDroppedFile(files);
+   let filesUploadCollection:IStateContent[] = [];
+   
+   files.forEach((item , index)=>{
+     let ext = getExtension(item.name);
+    //  console.log(ext , item.name)
+     let fileUploadData = {file:item , fileConversionFormat: "" ,filename:item.name, originalExt:ext , fileType:item.type, fileMode:"image" , fileIndex:index , isUploaded:false};
+     filesUploadCollection.push(fileUploadData);
+    
+     
+  })
+  if(filesUploadCollection.length !== 0 ){
+    updateDroppedFile(filesUploadCollection as IStateContent[]);
+    setShowDropZone(false);
+  }
   };
 
   const dragoverCoverZone = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     setShowDropZone(true);
   };
 
+
+  console.log(droppedFiles)
+  
   return (
-    <div className=" px-8 w-full h-fit dragarea">
-        {(droppedFiles.length == 0)?
-              <SC.DropZoneContainer className="w-full h-100  m-auto flex justify-center items-center">
-              {showDropZone ? (
-                <Coverzone
-                  onDrop={(e) => dropFiledata(e)}
-                  onDragover={(e) => dragoverCoverZone(e)}
-                />
-              ) : (
-                ""
-              )}
-              <SelectInput />
-            </SC.DropZoneContainer>
-
-            :
-      // file not empty section 
-            <DroppedFileNotNull />
-
-        }
-
+    <div className=" px-8 w-full h-fit">
+      {droppedFiles.length == 0 ? (
+        <div className="dragarea">
+            <Coverzone
+            onDrop={(e) => dropFiledata(e)}
+            onDragover={(e) => dragoverCoverZone(e)}
+            isDropped={showDropZone}
+          />
+        <SC.DropZoneContainer className="w-full h-100  m-auto flex justify-center items-center">
+          <SelectInput />
+        </SC.DropZoneContainer>
+        </div>
+      ) : (
+        // file not empty section
+        <div className="dragarea">
+            <Coverzone
+              onDrop={(e) => dropFiledata(e)}
+              onDragover={(e) => dragoverCoverZone(e)}
+              isDropped={showDropZone}
+            />
+          <DroppedFileNotNull />
+        </div>
+      )}
     </div>
   );
 }

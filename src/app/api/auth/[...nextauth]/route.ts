@@ -3,14 +3,14 @@ import DiscordProvider from "next-auth/providers/discord"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export const authOptions = {
+ const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
-      clientId: String(process.env.DISCORD_ID),
-      clientSecret: String(process.env.DISCORD_SECRETE),
+      clientId:"1161980821679378492",
+      clientSecret:"UMOO6lhWDg0C3wLD2YZBuqhUCT9Q54dY",
     }),
   ],
 } as AuthOptions

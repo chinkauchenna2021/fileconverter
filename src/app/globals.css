@@ -74,3 +74,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+
+
+  .scrollbararea::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollbararea::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .scrollbararea::-webkit-scrollbar-thumb {
+    background: #888; 
+      border-radius:5px;
+  }
+  .scrollbararea::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  } 

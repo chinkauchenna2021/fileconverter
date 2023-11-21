@@ -1,11 +1,12 @@
 import React from 'react'
 
 
-type FileType = {
-    resourceType:string
+interface IReturnType{
+    filetype:string;
+    fileformat:string
 }
 
-export const getFileType =({resourceType}:FileType):string=>{
+export const getFileType =(resourceType:string):IReturnType=>{
    let image = resourceType.split("/");
-   return image[0];
+   return {filetype:image[0] , fileformat:image[1]};
 };

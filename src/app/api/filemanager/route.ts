@@ -4,7 +4,7 @@ import { exec } from "child_process";
 import { NextRequest, NextResponse } from "next/server";
 import { join, extname, dirname } from "path";
 import type { IFiles, IStateContent } from "../../../../types/fileTypes";
-import { FfmpegClient } from "@/libs/FfmpegClient";
+import { FfmpegClient } from "@/libs/ffmpegClient";
 import { randomUUID } from "crypto";
 import { object } from "zod";
 

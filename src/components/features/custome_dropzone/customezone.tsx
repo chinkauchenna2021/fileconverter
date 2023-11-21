@@ -60,9 +60,9 @@ useEffect(()=>{
    files.forEach((item , index)=>{
      let ext = getExtension(item.name);
     //  console.log(ext , item.name)
-     let fileUploadData = {file:item , fileConversionFormat: "" , originalExt:ext , fileType:"" , fileIndex:index , isUploaded:false};
+     let fileUploadData = {file:item , fileConversionFormat: "" ,filename:item.name, originalExt:ext , fileType:item.type, fileMode:"image" , fileIndex:index , isUploaded:false};
      filesUploadCollection.push(fileUploadData);
-
+    
      
   })
   if(filesUploadCollection.length !== 0 ){
@@ -79,7 +79,7 @@ useEffect(()=>{
 
 
   console.log(droppedFiles)
-
+  
   return (
     <div className=" px-8 w-full h-fit">
       {droppedFiles.length == 0 ? (

@@ -32,7 +32,7 @@ export const useDropFile = create<State>((set, get) => ({
     set(() => ({ droppedFiles: fileFormatChanged }));
   },
   fileSendToServer: async (allFileUpload: IStateContent[]) => {
-
+      console.log(allFileUpload)
     let newFile = allFileUpload?.map(async (item: IStateContent) => ({
       ...item,
       file: await getFileToBase64(item.file)

@@ -47,9 +47,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   stripe_user_id    String  @default("0")
-  image_conversionPath String
-  user_image_outputurl String 
-  user_image_inputurl String
+  image_conversionPath String @default("./")
+  user_image_outputurl String @default("./")
 }
 
 model VerificationToken {

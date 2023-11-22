@@ -18,12 +18,12 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   return (
+    <SessionProvider session={session}>
     <html lang="en">
-      <SessionProvider session={session}>
       <body className={poppins.className}>
         {children}
         </body>
-     </SessionProvider>
     </html>
+   </SessionProvider>
   )
 }

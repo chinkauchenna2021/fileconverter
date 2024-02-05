@@ -14,7 +14,7 @@ type Props = {}
 
 function SelectInput({}: Props) {
   return (
-      <SC.SelectBar className="min-w-[420px] h-[70px] rounded-md hover:cursor-pointer hover:shadow-lg hover:shadow-black">
+      <SC.SelectBar className="min-w-[520px] h-[70px] rounded-md hover:cursor-pointer hover:shadow-lg hover:shadow-black">
            <div className='w-full h-full flex justify-center items-center'>
                   <div className='w-3/6 h-full flex justify-center items-center text-white font-medium capitalize text-xl'>choose file</div>
                   <div className='w-3/6 flex justify-evenly h-5/6 px-2 gap-1'>

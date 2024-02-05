@@ -10,7 +10,7 @@ function  DroppedFileNotNull({}: Props) {
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
 
   return (
-    <SC.SingleFileContainer  className=" bg-transparent ">
+    <SC.SingleFileContainer  className=" ">
         <DroppedSingleFile />
         <SelectFileNotNull />
         

@@ -19,7 +19,7 @@ function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
   return (
     <div
       key={index}
-      className=" border-b border-b-slate-300 rounded-sm bg-white w-full h-14 grid grid-cols-6 flex-row shadow-sm shadow-blue-200"
+      className=" border-b border-b-slate-300 rounded-sm bg-dark w-full h-14 grid grid-cols-6 flex-row shadow-sm shadow-blue-200"
     >
       <div className="col-span-2 flex justify-start items-center">
         <div className="w-fit h-fit flex space-x-5 justify-between mx-4">
@@ -45,7 +45,7 @@ function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
           <div className="w-fit h-fit text-xs px-2 py-[3px] rounded-sm border border-1 border-green-400 text-green-400 ">
             Ready
           </div>
-          <div className="mx-7 text-xs text-slate-500">
+          <div className="mx-10 text-xs  text-slate-500">
             {getFileSize(files.size)}
           </div>
         </div>

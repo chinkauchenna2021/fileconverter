@@ -17,8 +17,6 @@ export const FfmpegClient = async (fileName:string , filePath:string ,outputFile
   const ffmpegRef = useRef(new FFmpeg())
   const [loadingState , setLoadingState] = useState<string>()
 
-
-
     const baseURL = 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.7/dist/umd'
     const ffmpeg = ffmpegRef.current
     ffmpeg.on('log', ({ message }) => {

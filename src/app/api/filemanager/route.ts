@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const fileRequest = await request.formData();
-    const alldata =  await fileRequest.get("uploadedFileObject");
+    const alldata =   fileRequest.get("uploadedFileObject");
     const jsonObject = await JSON.parse(String(alldata)) as IStateContent;
     let fileBlob =  String(jsonObject.file).split(',')[1];
     let fileName =  randomUUID()+"."+jsonObject.originalExt ;

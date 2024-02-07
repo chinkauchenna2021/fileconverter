@@ -18,3 +18,10 @@ export const getDroppedFile = (ev: React.DragEvent<HTMLDivElement>):File[]=>{
     }
 return _Files ;
 }
+
+
+
+export const getFileInput = (fileInput:any)=>{
+  const selectedFiles = Array.from(fileInput.files);
+  return selectedFiles
+}

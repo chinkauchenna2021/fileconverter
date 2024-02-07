@@ -3,6 +3,7 @@ import DroppedSingleFile from './droppedSingleFile';
 import * as SC from '../droppedFileNotNull/styles';
 import { useDropFile } from '../../../../../stores/useDropFile';
 import SelectFileNotNull from './shared/selectFileNotNull';
+import AllFileControls from './shared/AllFileControls';
 
 type Props = {}
 
@@ -12,8 +13,9 @@ function  DroppedFileNotNull({}: Props) {
   return (
     <SC.SingleFileContainer  className=" ">
         <DroppedSingleFile />
-        <SelectFileNotNull />
-        
+        {(droppedFiles.length > 1) && 
+        <AllFileControls />}
+        <SelectFileNotNull />  
     </SC.SingleFileContainer>
   )
 }

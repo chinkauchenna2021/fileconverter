@@ -50,9 +50,9 @@ function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
           </div>
         </div>
 
-        <div  onClick={()=>onclick()}  className="w-full h-full justify-end flex items-center">
-          <div className="w-fit h-fit rounded-sm cursor-pointer p-1 hover:border hover:border-slate-500 mx-2">
-            <FiX className="text-slate-400 hover:text-slate-500 " size={30} />
+        <div  className="w-full h-full justify-end flex items-center">
+          <div onClick={()=>onclick()} className="w-fit h-fit rounded-sm cursor-pointer p-1 hover:border hover:border-slate-500 mx-2">
+            <FiX  className="text-slate-400 hover:text-slate-500 " size={30} />
           </div>
         </div>
       </div>

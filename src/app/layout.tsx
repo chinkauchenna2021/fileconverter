@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import SessionProvider from "@/libs/clientServerSide";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/toaster"
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300"] });
 
@@ -38,8 +39,9 @@ export default async function RootLayout({
 `,
             }}
           />
-          {children}
-        </body>
+          <main>{children}</main>
+          <Toaster />
+        </body>   
       </html>
     </SessionProvider>
   );

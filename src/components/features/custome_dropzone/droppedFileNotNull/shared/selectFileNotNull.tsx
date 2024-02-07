@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import * as SC from "../styles";
 import { FiArrowRight } from "react-icons/fi";
-import { FaDropbox, FaGoogleDrive } from "react-icons/fa";
+import { FaDropbox, FaGoogleDrive, FaLessThan } from "react-icons/fa";
 
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile, toBlobURL } from '@ffmpeg/util'
+import { useToast } from "@/components/ui/use-toast"
 
 
 
@@ -19,6 +20,8 @@ import {
 
 import { useDropFile } from "../../../../../../stores/useDropFile";
 import { IStateContent } from "../../../../../../types/fileTypes";
+import convertToaFileName from '@/hooks/convertToaFileName';
+
 
 type Props = {};
 
@@ -27,13 +30,17 @@ function SelectFileNotNull({}: Props) {
 // state for ffmpeg
 const [loaded, setLoaded] = useState(false)
 const [isLoading, setIsLoading] = useState(false)
+const [converting , setConverting] = useState(true)
 const ffmpegRef = useRef(new FFmpeg())
 const videoRef = useRef<HTMLVideoElement | null>(null)
 const messageRef = useRef<HTMLParagraphElement | null>(null)
   const droppedFiles = useDropFile((state: any) => state?.droppedFiles);
+  const convertedFiles = useDropFile((state: any) => state?.convertedFiles);
+  const ffmpegFileLoadedState = useDropFile((state: any) => state?.ffmpegFileLoadedState);
   const droppedFileConverted = useDropFile(
     (state: any) => state?.fileSendToServer
   );
+  const { toast } = useToast()
 
 
   useEffect(()=>{
@@ -58,22 +65,45 @@ const messageRef = useRef<HTMLParagraphElement | null>(null)
   },[])
 
 
-  const transcode = async () => {
+  useEffect(()=>{
+    ffmpegFileLoadedState(loaded)
+  },[ffmpegFileLoadedState, loaded])
+
+
+
+
+  const transcode = async (file:File , oldFileName:string , newFileName:string , newFileMime:string) => {
     const ffmpeg = ffmpegRef.current
     // u can use 'https://ffmpegwasm.netlify.app/video/video-15s.avi' to download the video to public folder for testing
-    await ffmpeg.writeFile('input.avi', await fetchFile('https://raw.githubusercontent.com/ffmpegwasm/testdata/master/video-15s.avi'))
-    await ffmpeg.exec(['-i', 'input.avi', 'output.mp4'])
-    const data = (await ffmpeg.readFile('output.mp4')) as any
-      console.log(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
+    
+    let dataURL =  URL.createObjectURL(file);
+    await ffmpeg.writeFile(oldFileName, await fetchFile( String(dataURL)))
+    await ffmpeg.exec(['-i', oldFileName, newFileName])
+    const data = (await ffmpeg.readFile(newFileName)) as any
+    return URL.createObjectURL(new Blob([data.buffer], { type: newFileMime }));
   }
 
   const onconvert = async () => {
-    // droppedFiles.forEach((data:IStateContent)=>{
-      await transcode()
-      console.log(loaded , isLoading);
+    let returnConversion
+      droppedFiles.forEach(async (data:IStateContent)=>{ 
+       let  newFile  =  convertToaFileName(data.fileConversionFormat)
+      const getFileMime = data.fileMode+"/"+data.fileConversionFormat ; 
+      returnConversion  =  await transcode(data.file,  String(data.filename) , newFile,  getFileMime);
+    })
+    toast({
+      title: "File conversion on-going",
+      description: "Just hold on file conversion will be done in a minute",
+    })
 
-    // })
-    // droppedFileConverted(droppedFiles);
+    if(returnConversion != null || returnConversion != undefined){
+     setConverting(false)
+    }
+    toast({
+      title: "File conversion completed",
+      description: "File conversion is done and ready for download",
+    })
+
+ console.log(loaded , isLoading , returnConversion , "converted successfully ");
   };
 
   return (

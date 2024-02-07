@@ -78,7 +78,7 @@ useEffect(()=>{
   };
 
 
-  console.log(droppedFiles)
+  // console.log(droppedFiles)
   
   return (
     <div className=" px-8 w-full h-fit">

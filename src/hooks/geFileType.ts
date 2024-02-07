@@ -7,6 +7,7 @@ interface IReturnType{
 }
 
 export const getFileType =(resourceType:string):IReturnType=>{
-   let image = resourceType.split("/");
-   return {filetype:image[0] , fileformat:image[1]};
+        let image = resourceType.split("/");
+        return {filetype:image[0] , fileformat:image[1]};
+
 };

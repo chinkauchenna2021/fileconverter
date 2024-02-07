@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 import { IStateContent } from "../types/fileTypes";
 import Axios from "axios";
 import { getFileToBase64 } from "@/hooks/getFileToBase64";
+import { FaLessThanEqual } from "react-icons/fa";
 // import { setInterval } from "timers/promises";
 
 interface State {
@@ -12,11 +13,13 @@ interface State {
   updateDroppedFile: (file: any[]) => void;
   deleteFile: (fileId: number) => void;
   fileSendToServer: (fileUpload: IStateContent[]) => void;
+  loadedFfmpegWasmFiles:boolean;
 }
 
 export const useDropFile = create<State>((set, get) => ({
   droppedFiles: [],
   convertedFiles: [],
+  loadedFfmpegWasmFiles:false,
   updateDroppedFile: (file: IStateContent[]) => {
     set((state: any) => ({
       droppedFiles: Array.from(new Set([...state.droppedFiles, ...file])),
@@ -32,7 +35,6 @@ export const useDropFile = create<State>((set, get) => ({
     set(() => ({ droppedFiles: fileFormatChanged }));
   },
   fileSendToServer: async (allFileUpload: IStateContent[]) => {
-      console.log(allFileUpload)
     let newFile = allFileUpload?.map(async (item: IStateContent) => ({
       ...item,
       file: await getFileToBase64(item.file)
@@ -55,23 +57,13 @@ export const useDropFile = create<State>((set, get) => ({
            },
      
          });
-         console.log(allConvertedFiles)
-       },3000)
-     })
 
-    // let dataObj = { data: datas };
-    // formData.append("uploadedFileObject", JSON.stringify(dataObj));
-    // let allConvertedFiles = await Axios({
-    //   method: "POST",
-    //   url: "http://localhost:3000/api/filemanager",
-    //   data: formData,
-    //   headers: {
-    //     "Accept": "application/json",
-    //     "Content-Type": "multipart/form-data",
-    //   },
-
-    // });
-    //  console.log(allConvertedFiles)
-    // set(()=>({convertedFiles:allConvertedFiles}))
+          },3000)
+        })
   },
+
+  ffmpegFileLoadedState:  (isLoaded:boolean) => {
+      set(()=>({ loadedFfmpegWasmFiles: isLoaded }));
+  },
+
 }));

@@ -60,6 +60,9 @@ function DroppedSingleFile({}: Props) {
 
           case "video":
             return <div className="">{/* video components */}</div>;
+            break;
+          case "audio":
+            break;
         }
       })}
     </div>

@@ -21,6 +21,7 @@ import {
 import { useDropFile } from "../../../../../../stores/useDropFile";
 import { IStateContent } from "../../../../../../types/fileTypes";
 import convertToaFileName from '@/hooks/convertToaFileName';
+import MainFileContainer from './mainSelectFile';
 
 
 type Props = {};
@@ -98,16 +99,26 @@ const messageRef = useRef<HTMLParagraphElement | null>(null)
     if(returnConversion != null || returnConversion != undefined){
      setConverting(false)
     }
+    if(loaded){
     toast({
       title: "File conversion completed",
       description: "File conversion is done and ready for download",
     })
+    }
 
  console.log(loaded , isLoading , returnConversion , "converted successfully ");
   };
 
   return (
-    <SC.SharedFileSelector className="border-none overflow-hidden w-full h-20 border border-slate-800 grid grid-cols-5 flex-row justify-between items-center">
+    <SC.SharedFileSelector className="border-none overflow-hidden flex  w-full h-20 border border-slate-800  flex-row justify-between items-center">
+          <div className=" w-1/6   h-[40px]  px-5" >
+           <MainFileContainer  />
+
+          </div> 
+      
+
+       <div className='w-3/6'>
+
       <div className="col-span-3">
      
         {/* added for ffmpeg loader  */}
@@ -167,11 +178,12 @@ const messageRef = useRef<HTMLParagraphElement | null>(null)
             <div className="w-fit h-fit text-md cursor-pointer capitalize font-semibold text-white px-2 ">
               convert
             </div>
-            <div className="w-fit h-fit flex px-2 ">
+            <SC.AnimateArrow className="w-fit h-fit flex px-2 ">
               <FiArrowRight size={25} className="text-slate-300 " />
-            </div>
+            </SC.AnimateArrow>
           </div>
         </div>
+      </div>
       </div>
     </SC.SharedFileSelector>
   );

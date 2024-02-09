@@ -75,7 +75,6 @@ const updateDroppedFile = useDropFile((state)=>state.updateDroppedFile);
       // console.log(evt.);
       if(filesUploadCollection.length > 0){
         updateDroppedFile(filesUploadCollection);
-
       }
 }
 
@@ -84,7 +83,7 @@ const updateDroppedFile = useDropFile((state)=>state.updateDroppedFile);
            <div className='w-full h-full flex justify-center items-center'>
                   <div className='w-3/6 h-full flex justify-center items-center text-white font-medium capitalize text-xl'  >
                   <div className="grid w-full max-w-sm items-center gap-1.5">
-                    <Input id="picture" type="file" multiple className='text-white'  onChange={(evt) => openFilePicker(evt)}  style={{backgroundColor:"transparent" , border:"none"}}/>
+                    <Input id="picture" type="file" multiple className='text-white outline-none border-0'  onChange={(evt) => openFilePicker(evt)}  style={{backgroundColor:"transparent" , border:"none"}}/>
                   </div>
                     </div>
                   <div className='w-3/6 flex justify-evenly h-5/6 px-2 gap-1'>

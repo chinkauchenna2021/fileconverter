@@ -86,6 +86,7 @@ function SelectFileConversion({ onchange }: ISelectButton) {
         <Button
           variant="outline"
           role="combobox"
+          
           aria-expanded={open}
           className="w-fit justify-between"
         >
@@ -93,7 +94,7 @@ function SelectFileConversion({ onchange }: ISelectButton) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[400px] p-0">
+      <PopoverContent className="w-[400px] p-0 bg-black">
         <Command>
           <CommandInput placeholder="Search framework..." />
           <CommandEmpty>No Filetype Found.</CommandEmpty>

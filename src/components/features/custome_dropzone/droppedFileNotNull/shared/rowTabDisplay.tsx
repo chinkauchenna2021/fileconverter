@@ -5,6 +5,8 @@ import { FiX, FiArrowRight } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import SelectFileConversion from "./selectFileConversion";
+import { Progress } from "@/components/ui/progress"
+
 
 type Props = {
   index: number;
@@ -16,6 +18,10 @@ type Props = {
 };
 
 function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
+
+
+const isLoading = true ; 
+
   return (
     <div
       key={index}
@@ -34,27 +40,31 @@ function RowTabDisplay({ index, files , onchange , onclick  }: Props) {
       </div>
       <div className="col-span-2 w-full h-full flex justify-center items-center">
         <div className="w-fit flex justify-center items-center">
-          <div className="w-fit h-fit text-sm text-slate-400 mx-2">to:</div>
+          <div className="w-fit h-fit text-[10px] text-slate-400 mx-2">to:</div>
           <div className="w-fit h-fit">
             <SelectFileConversion onchange={(item:string)=>onchange(item)} />
           </div>
         </div>
       </div>
-      <div className="col-span-2 flex">
-        <div className="w-4/5 flex items-center justify-evenly space-x-2 ">
-          <div className="w-fit h-fit text-xs px-2 py-[3px] rounded-sm border border-1 border-green-400 text-green-400 ">
+      <div className="col-span-2  w-full flex justify-between  items-center">
+        {(isLoading)? 
+          <div className="  h-fit" >
+          <Progress className="min-w-[120px]" value={60} />
+          </div>
+          :
+          <div className="w-full h-fit text-xs px-2 py-[3px] rounded-sm border border-1 border-green-400 text-green-400 ">
             Ready
           </div>
+           }
           <div className="mx-10 text-xs  text-slate-500">
             {getFileSize(files.size)}
           </div>
-        </div>
-
-        <div  className="w-full h-full justify-end flex items-center">
-          <div onClick={()=>onclick()} className="w-fit h-fit rounded-sm cursor-pointer p-1 hover:border hover:border-slate-500 mx-2">
-            <FiX  className="text-slate-400 hover:text-slate-500 " size={30} />
+        <div  className="w-fit h-full justify-end flex items-center">
+          <div onClick={()=>onclick()} className="w-fit h-fit rounded-sm cursor-pointer p-1 hover:border hover:border-pink-700 mx-2">
+            <FiX  className="text-slate-400 hover:text-pink-700 " size={20} />
           </div>
         </div>
+
       </div>
     </div>
   );

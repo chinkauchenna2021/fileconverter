@@ -4,6 +4,7 @@ import * as SC from '../droppedFileNotNull/styles';
 import { useDropFile } from '../../../../../stores/useDropFile';
 import SelectFileNotNull from './shared/selectFileNotNull';
 import AllFileControls from './shared/AllFileControls';
+import MainFileContainer from './shared/mainSelectFile';
 
 type Props = {}
 

@@ -16,3 +16,11 @@ export const SharedFileSelector = styled.div`
 `;
 
 
+export const AnimateBtn = styled.div`
+
+`;
+
+
+export const AnimateArrow = styled.div`
+
+`;
